@@ -4,6 +4,8 @@
  */
 package com.ministore.web.Controller;
 
+import com.ministore.web.DAO.WorkSheetDAO;
+import com.ministore.web.DTO.TimekeepingDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.naming.NamingException;
 //import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpServlet;
@@ -22,10 +27,8 @@ import java.io.PrintWriter;
  *
  * @author DUY KHANH
  */
-@WebServlet(name = "DispathController", urlPatterns = {"/DispathController"})
-public class DispathController extends HttpServlet {
-private final String HOME_PAGE = "home_ministore.jsp";
-private final String WORKSHEET_MANAGEMENT = "WorksheetManagementServlet";
+@WebServlet(name = "WorksheetManagementServlet", urlPatterns = {"/WorksheetManagementServlet"})
+public class WorksheetManagementServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,19 +40,23 @@ private final String WORKSHEET_MANAGEMENT = "WorksheetManagementServlet";
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        String button = request.getParameter("btAction");
-        String url = HOME_PAGE;
+            throws ServletException, IOException {
+        String url = "components_manage_worksheet.jsp";
         try {
-            if(button == null) {
-                //do not thing
-            } else if (button.equals("Worksheet_Management")) {
-                url=WORKSHEET_MANAGEMENT;
-            }          
+            //Call DAO
+            WorkSheetDAO dao = new WorkSheetDAO();
+            dao.ShowHistory();
+            ArrayList<TimekeepingDTO> result = dao.ShowHistory();
+            if (result != null) {
+                request.setAttribute("WS_History", result);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);         
+            rd.forward(request, response);
         }
     }
 

@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package com.ministore.web.Controller;
-
+import com.ministore.web.DAO.SheetDetailsDAO;
+import com.ministore.web.DAO.WorkSheetDAO;
+import com.ministore.web.DTO.SheetDetailsDTO;
+import com.ministore.web.DTO.TimekeepingDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,22 +14,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-//import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.naming.NamingException;
+//import java.io.IOException;
+//import java.io.PrintWriter;
+//import java.sql.SQLException;
+//import java.util.ArrayList;
+//import javax.naming.NamingException;
 /**
  *
  * @author DUY KHANH
  */
-@WebServlet(name = "DispathController", urlPatterns = {"/DispathController"})
-public class DispathController extends HttpServlet {
-private final String HOME_PAGE = "home_ministore.jsp";
-private final String WORKSHEET_MANAGEMENT = "WorksheetManagementServlet";
-private final String WORKSHEET_DETAILS = "SheetDetailsManagementServlet";
+@WebServlet(name = "SheetDetailsManagementServlet", urlPatterns = {"/SheetDetailsManagementServlet"})
+public class SheetDetailsManagementServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,21 +39,24 @@ private final String WORKSHEET_DETAILS = "SheetDetailsManagementServlet";
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        String button = request.getParameter("btAction");
-        String url = HOME_PAGE;
+            throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
+       String url = "components_manage_sheetdetails.jsp";
         try {
-            if(button == null) {
-                //do not thing
-            } else if (button.equals("Worksheet_Management")) {
-                url=WORKSHEET_MANAGEMENT;
-            }  else if (button.equals("Details_Worksheet")) {
-                url=WORKSHEET_DETAILS;
-            }          
+            //Call DAO
+            SheetDetailsDAO dao = new SheetDetailsDAO();
+            dao.ShowSheetDetails();
+            ArrayList<SheetDetailsDTO> result = dao.ShowSheetDetails();
+            if (result != null) {
+                request.setAttribute("WS_Details", result);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);         
+            rd.forward(request, response);
         }
     }
 

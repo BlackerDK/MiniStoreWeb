@@ -4,6 +4,7 @@
  */
 package com.ministore.web.DAO;
 
+import com.ministore.web.DTO.SheetDetailsDTO;
 import com.ministore.web.DTO.TimekeepingDTO;
 import com.mycompany.ministorewebmoblie.Utils.DBUtil;
 import java.io.Serializable;
@@ -18,22 +19,21 @@ import javax.naming.NamingException;
  *
  * @author DUY KHANH
  */
-public class WorkSheetDAO implements Serializable{
-    public ArrayList<TimekeepingDTO>ShowHistory() throws SQLException,NamingException{
+public class SheetDetailsDAO implements Serializable{
+    public ArrayList<SheetDetailsDTO>ShowSheetDetails() throws SQLException,NamingException{
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        ArrayList<TimekeepingDTO> dto = new ArrayList<>();
+        ArrayList<SheetDetailsDTO> dto = new ArrayList<>();
         try {
             con = DBUtil.makeConnection();
             if (con != null) {
-                String sql = "Select ws.IdWorkSheet,e.FullNameEmp,ws.Date,ws.Sheet,ws.TimeCheckIn,ws.TimeCheckOut,ws.Status,ws.Total_working_hours "
-                        + "from Employee e inner join WorkSheet ws "
-                        + "on e.IdEmp =ws.IdEmp";
+                String sql = "Select sht.Sheet, sht.DescriptionS,sht.CoefficientsSalary,sht.ShiftStartTime,ShiftEndTime, pms.Permission,sht.CheckNight "
+                        + "from SheetDetail sht inner join Permission pms on sht.Roles = pms.Roles";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    dto.add(new TimekeepingDTO(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getDate(5), rs.getDate(6),rs.getBoolean(7),rs.getTime(8)));
+                    dto.add(new SheetDetailsDTO(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getTime(4), rs.getTime(5), rs.getString(6),rs.getBoolean(7)));
                 }
             }
         } finally {

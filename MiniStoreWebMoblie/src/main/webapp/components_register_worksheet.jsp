@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : components_register_worksheet
+    Created on : Jul 13, 2023, 7:10:42 PM
+    Author     : DUY KHANH
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
@@ -218,7 +222,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-person"></i>
@@ -228,7 +231,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-gear"></i>
@@ -238,7 +240,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                                     <i class="bi bi-question-circle"></i>
@@ -290,14 +291,13 @@
                         </ul>
                     </li><!-- End Components Nav -->
 
-
                     <li class="nav-item">
                         <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-menu-button-wide"></i><span>Worksheet Management</span><i class="bi bi-chevron-down ms-auto"></i>
                         </a>
                         <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                             <li>
-                                <button type="button" class="btn btn-light rounded-pill" value="Worksheet_Management" name="btAction">                                   
+                                <button type="button" class="btn btn-light rounded-pill" value="Worksheet_Management" name="btAction">
                                     Worksheet History
                                 </button>
                             </li>

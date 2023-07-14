@@ -280,31 +280,28 @@
                                     <i class="bi bi-circle"></i><span>Alerts</span>
                                 </a>
                             </li>
+                            <li>
+                                <button class="btn btn-success" value="Worksheet_Management" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Worksheet Management</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn btn-success" value="Details_Worksheet" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Details Worksheet</span>
+                                </button>
+                            </li>
                         </ul>
                     </li><!-- End Components Nav -->
-
                     <li class="nav-item">
-                        <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-menu-button-wide"></i><span>Worksheet Management</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                            <i class="bi bi-journal-text"></i><span>Manage Products</span><i class="bi bi-chevron-down ms-auto"></i>
                         </a>
-                        <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <button  class="btn btn-light rounded-pill" value="Worksheet_Management" name="btAction">
-                                    Worksheet History
-                                </button>
-                            </li>
-                            <li>
-                                <button  class="btn btn-light rounded-pill" value="Register_Worksheet" name="btAction">
-                                    Register Worksheet
-                                </button>
-                            </li>
-                            <li>
-                                <button  class="btn btn-light rounded-pill" value="Details_Worksheet" name="btAction">
-                                    Details Worksheet
-                                </button>
                             </li>
                         </ul>
-                    </li><!-- End Worksheet Management -->
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -330,10 +327,10 @@
                 </ul>
             </aside><!-- End Sidebar-->
         </form>
+
         <!-- END CODE HERE -->
 
         <main id="main" class="main">
-
             <div class="pagetitle">
                 <h1>Dashboard</h1>
                 <nav>

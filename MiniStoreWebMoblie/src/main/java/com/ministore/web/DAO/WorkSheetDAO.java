@@ -18,8 +18,9 @@ import javax.naming.NamingException;
  *
  * @author DUY KHANH
  */
-public class WorkSheetDAO implements Serializable{
-    public ArrayList<TimekeepingDTO>ShowHistory() throws SQLException,NamingException{
+public class WorkSheetDAO implements Serializable {
+
+    public ArrayList<TimekeepingDTO> ShowHistory() throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -33,7 +34,7 @@ public class WorkSheetDAO implements Serializable{
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    dto.add(new TimekeepingDTO(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getDate(5), rs.getDate(6),rs.getBoolean(7),rs.getTime(8)));
+                    dto.add(new TimekeepingDTO(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getDate(5), rs.getDate(6), rs.getBoolean(7), rs.getTime(8)));
                 }
             }
         } finally {
@@ -49,4 +50,80 @@ public class WorkSheetDAO implements Serializable{
         }
         return dto;
     }
+
+    public boolean updateWorkSheet(String id, int sheet)
+            throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;//Do dạng tham số động
+        ResultSet rs = null;
+        boolean result = false;
+        try {
+            //1 . Connect Database
+            con = DBUtil.makeConnection();
+            //2 . Create SQL Statement String
+            if (con != null) { // Trong username là khóa chính
+                String sql = "UPDATE WorkSheet\n"
+                        + "SET Sheet = ?\n"
+                        + "where IdWorkSheet = ?";
+                //Điều kiện của hidden username
+                //3 . Create Statement to SET SQL
+                stm = con.prepareStatement(sql);//Nạp  này vào Obj                
+                stm.setInt(1, sheet);
+                stm.setString(2, id);
+                //4 . Execute Query
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    result = true;
+                }
+                //5 . Process
+            }//End if connection is process
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+//    public boolean deleteBook(String primaryKey)
+//            throws SQLException, NamingException {
+//        Connection con = null;
+//        PreparedStatement stm = null;//Do dạng tham số động
+//        ResultSet rs = null;
+//        boolean result = false;
+//        try {
+//            //1 . Connect Database
+//            con = DBUtil.makeConnection();
+//            //2 . Create SQL Statement String
+//            if (con != null) { // Trong username là khóa chính
+//                String sql = "DELETE from BookTable "
+//                        + "WHERE IDBook = ?";
+//                //Điều kiện của hidden username
+//                //3 . Create Statement to SET SQL
+//                stm = con.prepareStatement(sql);//Nạp  này vào Obj                
+//                stm.setString(1, primaryKey);
+//                //4 . Execute Query
+//                int row = stm.executeUpdate();
+//                if (row > 0) {
+//                    result = true;
+//                }
+//                //5 . Process
+//            }//End if connection is process
+//        } finally {
+//
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//        return result;
+//    }
 }

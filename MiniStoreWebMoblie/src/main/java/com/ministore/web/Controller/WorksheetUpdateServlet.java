@@ -4,6 +4,8 @@
  */
 package com.ministore.web.Controller;
 
+import com.ministore.web.DAO.WorkSheetDAO;
+import com.ministore.web.DTO.TimekeepingDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.naming.NamingException;
+//import java.sql.SQLException;
+//import javax.naming.NamingException;
 //import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpServlet;
@@ -22,12 +29,9 @@ import java.io.PrintWriter;
  *
  * @author DUY KHANH
  */
-@WebServlet(name = "DispathController", urlPatterns = {"/DispathController"})
-public class DispathController extends HttpServlet {
-private final String HOME_PAGE = "home_ministore.jsp";
-private final String WORKSHEET_MANAGEMENT = "WorksheetManagementServlet";
-private final String WORKSHEET_DETAILS = "SheetDetailsManagementServlet";
-private final String WORKSHEET_UPDATE = "WorksheetUpdateServlet";
+@WebServlet(name = "WorksheetUpdateServlet", urlPatterns = {"/WorksheetUpdateServlet"})
+public class WorksheetUpdateServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,23 +42,25 @@ private final String WORKSHEET_UPDATE = "WorksheetUpdateServlet";
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        String button = request.getParameter("btAction");
-        String url = HOME_PAGE;
+            throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        String idWorksheet = request.getParameter("txtIDWorksheet");
+        String idSheet = request.getParameter("txtIdSheet");
+        String url = "WorksheetManagementServlet";
         try {
-            if(button == null) {
-                //do not thing
-            } else if (button.equals("Worksheet_Management")) {
-                url=WORKSHEET_MANAGEMENT;
-            }  else if (button.equals("Details_Worksheet")) {
-                url=WORKSHEET_DETAILS;
-            }  else if (button.equals("Update")) {
-                url=WORKSHEET_UPDATE;
-            }            
+            //Call DAO
+            WorkSheetDAO dao = new WorkSheetDAO();
+            boolean update = dao.updateWorkSheet(idWorksheet,Integer.parseInt(idSheet));
+            if(update)
+            {
+                url="WorksheetManagementServlet";
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);         
+            response.sendRedirect(url);
         }
     }
 
@@ -96,5 +102,4 @@ private final String WORKSHEET_UPDATE = "WorksheetUpdateServlet";
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

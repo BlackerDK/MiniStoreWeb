@@ -272,47 +272,49 @@
                 <ul class="sidebar-nav" id="sidebar-nav">
 
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="home_ministore.jsp">
+                        <a class="nav-link " href="home_ministore.jsp">
                             <i class="bi bi-grid"></i>
                             <span>Dashboard</span>
                         </a>
                     </li><!-- End Dashboard Nav -->
 
                     <li class="nav-item">
-                        <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
                         </a>
-                        <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
                                 <a href="components-alerts.html">
                                     <i class="bi bi-circle"></i><span>Alerts</span>
                                 </a>
                             </li>
+                            <li>
+                                <button value="Worksheet_Management" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Worksheet Management</span>
+                                </button>
+                            </li>
                         </ul>
                     </li><!-- End Components Nav -->
-
                     <li class="nav-item">
-                        <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-menu-button-wide"></i><span>Worksheet Management</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                            <i class="bi bi-journal-text"></i><span>Manage Products</span><i class="bi bi-chevron-down ms-auto"></i>
                         </a>
-                        <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <button type="button" class="btn btn-light rounded-pill" value="Worksheet_Management" name="btAction">
-                                    Worksheet History
+                                <!--            <a href="components_manage_product.jsp?parameter=value"  name="btAction">
+                                              <i class="bi bi-circle"></i><span>Products</span>
+                                            </a>-->
+                                <button value="Products_Management" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Products</span>
                                 </button>
-                            </li>
-                            <li>
-                                <button type="button" class="btn btn-light rounded-pill" value="Register_Worksheet" name="btAction">
-                                    Register Worksheet
                                 </button>
-                            </li>
-                            <li>
-                                <button type="button" class="btn btn-light rounded-pill" value="Details_Worksheet" name="btAction">
-                                    Details Worksheet
+                                <button value="Units_Management" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Units</span>
                                 </button>
                             </li>
                         </ul>
-                    </li><!-- End Worksheet Management -->
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -326,7 +328,9 @@
                         </ul>
                     </li><!-- End Forms Nav -->
 
+
                     <li class="nav-heading">Pages</li>
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="Login.jsp">
                             <i class="bi bi-box-arrow-in-right"></i>
@@ -336,7 +340,6 @@
                 </ul>
             </aside><!-- End Sidebar-->
         </form>
-
         <main id="main" class="main">
             <div class="pagetitle">
                 <h1>Worksheet Management</h1>

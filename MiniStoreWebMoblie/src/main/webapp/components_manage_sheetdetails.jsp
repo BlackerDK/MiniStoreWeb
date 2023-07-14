@@ -1,4 +1,13 @@
-
+<%-- 
+    Document   : components_manage_sheetdetails
+    Created on : Jul 13, 2023, 10:57:29 PM
+    Author     : DUY KHANH
+--%>
+<%-- 
+    Document   : components_register_worksheet
+    Created on : Jul 13, 2023, 7:10:42 PM
+    Author     : DUY KHANH
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
@@ -218,7 +227,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-person"></i>
@@ -228,7 +236,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-gear"></i>
@@ -238,7 +245,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                                     <i class="bi bi-question-circle"></i>
@@ -265,7 +271,7 @@
         </header><!-- End Header -->
 
         <!-- ======= Sidebar ======= -->
-        <form action="DispathController" method="post">
+        <form action="DispathController" method="POST">
             <aside id="sidebar" class="sidebar">
 
                 <ul class="sidebar-nav" id="sidebar-nav">
@@ -276,7 +282,6 @@
                             <span>Dashboard</span>
                         </a>
                     </li><!-- End Dashboard Nav -->
-
                     <li class="nav-item">
                         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                             <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -334,7 +339,7 @@
                 </ul>
             </aside><!-- End Sidebar-->
         </form>
-        <!--<!-- CODE IN -->
+
         <main id="main" class="main">
             <div class="pagetitle">
                 <h1>Worksheet Management</h1>
@@ -342,63 +347,52 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="home_ministore.jsp">Home</a></li>
                         <li class="breadcrumb-item">Components</li>
-                        <li class="breadcrumb-item active">Worksheet Management</li>
+                        <li class="breadcrumb-item active">Sheet Details Management</li>
                     </ol>
                 </nav>
             </div><!-- End Page Title -->
-
+            <!--<!-- CODE IN -->
 
             <section class="section">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Manage WorkSheet</h5>
-                                <c:set var="result" value="${requestScope.WS_History}"/>
+                                <h5 class="card-title">Sheet Details Management</h5>
+                                <c:set var="result" value="${requestScope.WS_Details}"/>
                                 <c:if test="${not empty result}">   
                                     <table class="table datatable">
                                         <thead>
                                             <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Employees</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Sheet</th>
-                                                <th scope="col">Check In</th>
-                                                <th scope="col">Check Out</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Total Hours</th>
-                                                <th scope="col">Update Sheet</th>
+                                                <th scope="col">ID Sheet</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Coefficients</th>
+                                                <th scope="col">Shift Start</th>
+                                                <th scope="col">Shift End</th>
+                                                <th scope="col">Roles</th>
+                                                <th scope="col">Night </th>
                                             </tr>
                                         </thead>
-                                        <tbody>                                       
-                                            <c:forEach var="dto" items="${result}" varStatus="counter">                                                
-                                            <form action="DispathController" method="post">
+                                        <tbody>
+                                            <c:forEach var="dto" items="${result}" varStatus="counter">
+                                            <form action="DispathController" method="POST">
                                                 <tr>
-                                                    <td>
-                                                        ${dto.id}
-                                                        <input type="hidden" name="txtIDWorksheet" value="${dto.id}" />
-                                                    </td>
-                                                    <td>${dto.idEmployees}</td>
-                                                    <td>${dto.dateWorksheet}</td>
-                                                    <td>
-                                                        <input type="text" name="txtIdSheet" value="${dto.idSheetDetails}" />
-                                                    </td>
-                                                    <td>${dto.dateCheckIn}</td>
-                                                    <td>${dto.dateCheckOut}</td>
+                                                    <td>${dto.idSheet}</td>
+                                                    <td>${dto.decriptionDetails}</td>
+                                                    <td>${dto.coefficients}</td>
+                                                    <td>${dto.shiftStart}</td>
+                                                    <td>${dto.shiftEnd}</td>
+                                                    <td>${dto.roles}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${dto.status}">
-                                                                Attendance
+                                                            <c:when test="${dto.checkNight}">
+                                                                Yes
                                                             </c:when>
                                                             <c:otherwise>
-                                                                Absent
+                                                                No
                                                             </c:otherwise>
                                                         </c:choose>
-                                                    </td>
-                                                    <td>${dto.totalTime}</td>
-                                                    <td>
-                                                        <input type="submit" value="Update" name="btAction">
-                                                    </td> 
+                                                    </td>                                                 
                                                 </tr>
                                             </form>
                                         </c:forEach>

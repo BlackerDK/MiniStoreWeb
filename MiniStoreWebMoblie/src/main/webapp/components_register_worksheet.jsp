@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : components_register_worksheet
+    Created on : Jul 13, 2023, 7:10:42 PM
+    Author     : DUY KHANH
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
@@ -218,7 +222,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-person"></i>
@@ -228,7 +231,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-gear"></i>
@@ -238,7 +240,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                                     <i class="bi bi-question-circle"></i>
@@ -265,7 +266,7 @@
         </header><!-- End Header -->
 
         <!-- ======= Sidebar ======= -->
-        <form action="DispathController" method="post">
+        <form action="DispathController" method="POST">
             <aside id="sidebar" class="sidebar">
 
                 <ul class="sidebar-nav" id="sidebar-nav">
@@ -288,13 +289,8 @@
                                 </a>
                             </li>
                             <li>
-                                <button class="btn btn-success" value="Worksheet_Management" name="btAction">
+                                <button value="Worksheet_Management" name="btAction">
                                     <i class="bi bi-circle"></i><span>Worksheet Management</span>
-                                </button>
-                            </li>
-                            <li>
-                                <button class="btn btn-success" value="Details_Worksheet" name="btAction">
-                                    <i class="bi bi-circle"></i><span>Details Worksheet</span>
                                 </button>
                             </li>
                         </ul>
@@ -305,6 +301,16 @@
                         </a>
                         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
+                                <!--            <a href="components_manage_product.jsp?parameter=value"  name="btAction">
+                                              <i class="bi bi-circle"></i><span>Products</span>
+                                            </a>-->
+                                <button value="Products_Management" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Products</span>
+                                </button>
+                                </button>
+                                <button value="Units_Management" name="btAction">
+                                    <i class="bi bi-circle"></i><span>Units</span>
+                                </button>
                             </li>
                         </ul>
                     </li>
@@ -334,7 +340,6 @@
                 </ul>
             </aside><!-- End Sidebar-->
         </form>
-        <!--<!-- CODE IN -->
         <main id="main" class="main">
             <div class="pagetitle">
                 <h1>Worksheet Management</h1>
@@ -346,7 +351,7 @@
                     </ol>
                 </nav>
             </div><!-- End Page Title -->
-
+            <!--<!-- CODE IN -->
 
             <section class="section">
                 <div class="row">
@@ -367,22 +372,16 @@
                                                 <th scope="col">Check Out</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Total Hours</th>
-                                                <th scope="col">Update Sheet</th>
                                             </tr>
                                         </thead>
-                                        <tbody>                                       
-                                            <c:forEach var="dto" items="${result}" varStatus="counter">                                                
-                                            <form action="DispathController" method="post">
+                                        <tbody>
+                                            <c:forEach var="dto" items="${result}" varStatus="counter">
+                                            <form action="DispathController" method="POST">
                                                 <tr>
-                                                    <td>
-                                                        ${dto.id}
-                                                        <input type="hidden" name="txtIDWorksheet" value="${dto.id}" />
-                                                    </td>
+                                                    <td>${dto.id}</td>
                                                     <td>${dto.idEmployees}</td>
                                                     <td>${dto.dateWorksheet}</td>
-                                                    <td>
-                                                        <input type="text" name="txtIdSheet" value="${dto.idSheetDetails}" />
-                                                    </td>
+                                                    <td>${dto.idSheetDetails}</td>
                                                     <td>${dto.dateCheckIn}</td>
                                                     <td>${dto.dateCheckOut}</td>
                                                     <td>
@@ -396,9 +395,6 @@
                                                         </c:choose>
                                                     </td>
                                                     <td>${dto.totalTime}</td>
-                                                    <td>
-                                                        <input type="submit" value="Update" name="btAction">
-                                                    </td> 
                                                 </tr>
                                             </form>
                                         </c:forEach>

@@ -20,7 +20,7 @@ public class DBUtil {
         Connection conn = null;
         try {
 
-            String dbURL = "jdbc:sqlserver://MSI;database=MiniStore;encrypt=true;trustServerCertificate=true";
+            String dbURL = "jdbc:sqlserver://BLACKER-DK\\SQLEXPRESS;database=MiniStore;encrypt=true;trustServerCertificate=true";
             String user = "sa";
             String pass = "12345";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

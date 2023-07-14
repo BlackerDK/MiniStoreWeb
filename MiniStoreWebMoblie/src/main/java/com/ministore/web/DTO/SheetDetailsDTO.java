@@ -21,11 +21,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SheetDetailsDTO {
-    private int IdSheet;
-    private String DecriptionDetails;
-    private double Coefficients;
-    private Time ShiftStart;
-    private Time ShiftEnd;
-    private int Roles;
-    private Boolean CheckNight;
+    private int idSheet;
+    private String decriptionDetails;
+    private double coefficients;
+    private Time shiftStart;
+    private Time shiftEnd;
+    private String roles;
+    private Boolean checkNight;
 }
